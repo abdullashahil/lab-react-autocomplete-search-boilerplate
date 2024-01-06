@@ -48,3 +48,22 @@ input {
   background-color: rgb(68, 68, 68);
 }
 
+.suggestions{
+  border: 1px solid rgb(54, 54, 54);
+list-style: none;
+padding: 20px;
+height: 500px;
+overflow-y: scroll;
+min-width: 500px;
+max-width: 500px;
+}
+
+.suggestions::-webkit-scrollbar-thumb {
+  background-color: #4285f4; 
+  border-radius: 6px; 
+}
+
+.suggestions li:hover{
+  border: 1px solid rgb(222, 222, 222);
+  font-size: 30px;
+}

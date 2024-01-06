@@ -38,13 +38,13 @@ function TextBox() {
         <button className="search" onClick={searchButton}>Search</button>
       </div>
 
-      {showSuggestions && (
+      <div className="results">{showSuggestions && (
         <ul className="suggestions">
           {suggestions.map((country, index) => (
-            <p key={index}>{country.name}</p>
+            <li key={index}>{country.name}</li>
           ))}
         </ul>
-      )}
+      )}</div>
 
       {/* <h1>{val}</h1> */}
     </div>
