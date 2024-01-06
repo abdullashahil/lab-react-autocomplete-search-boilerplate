@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import countryData from '../../resources/countryData.json';
 
 function TextBox() {
@@ -20,8 +20,7 @@ function TextBox() {
   };
 
   const searchButton = () => {
-      setShowSuggestions(true);
-    
+    setShowSuggestions(true);
   };
 
   const getSuggestions = (inputText) => {
@@ -30,26 +29,40 @@ function TextBox() {
     );
   };
 
+  useEffect(() => {
+    const handleEscapeKeyDocument = (e) => {
+      if (e.key === 'Escape') {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKeyDocument);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKeyDocument);
+    };
+  }, []);
+
   return (
     <div className="main">
       <h1 className="head">Search any country</h1>
       <div className="box">
-        <input type="text" onChange={changeInput} onKeyDown={handleEscapeKey}/>
-        <button className="search" onClick={searchButton}>Search</button>
+        <input type="text" onChange={changeInput} />
+        <button className="search" onClick={searchButton}>
+          Search
+        </button>
       </div>
 
-      <div className="results">{showSuggestions && (
-        <ul className="suggestions">
-          {suggestions.map((country, index) => (
-            <li key={index}>{country.name}</li>
-          ))}
-        </ul>
-      )}</div>
-
-      {/* <h1>{val}</h1> */}
+      {showSuggestions && suggestions.length > 0 && (
+        <div className="results">
+          <ul className="suggestions">
+            {suggestions.map((country, index) => (
+              <li key={index}>{country.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
 
 export default TextBox;
-3
